@@ -21,10 +21,9 @@ export default function App() {
         id: Date.now().toString(),
         text: task,
         completed: false,
-        animationValue: new Animated.Value(0) // Animation value for new task
+        animationValue: new Animated.Value(0),
       };
 
-      // Trigger animation for new task
       Animated.timing(newTask.animationValue, {
         toValue: 1,
         duration: 500,
@@ -37,16 +36,14 @@ export default function App() {
   };
 
   const deleteTask = (taskId) => {
-    // Find the task that will be deleted and trigger the fade-out animation
     const taskToDelete = tasks.find(item => item.id === taskId);
 
     if (taskToDelete) {
       Animated.timing(taskToDelete.animationValue, {
-        toValue: 0, // Fade out
+        toValue: 0,
         duration: 500,
         useNativeDriver: true
       }).start(() => {
-        // After the fade-out, delete the task
         setTasks(tasks.filter((item) => item.id !== taskId));
       });
     }
@@ -60,7 +57,7 @@ export default function App() {
     );
   };
 
-  const editTask = (taskId, currentText) => {
+  const editTask = (taskId) => {
     setEditingTaskId(taskId);
   };
 
